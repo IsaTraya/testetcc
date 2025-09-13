@@ -3,99 +3,187 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Aplicativo</title>
+  <title>App Completo</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      background: #f9f9fb;
       margin: 0;
-      padding: 0;
-      background: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
-    .container {
-      max-width: 400px;
-      margin: 50px auto;
+
+    .page {
+      display: none;
+      width: 100%;
+      max-width: 380px;
       background: #fff;
-      padding: 24px;
-      border-radius: 10px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
     }
+
+    .active { display: block; }
+
     h2 {
       text-align: center;
-      margin-bottom: 16px;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 6px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      background: #007bff;
-      color: white;
+      margin-bottom: 8px;
+      font-size: 22px;
       font-weight: bold;
     }
-    button.secondary {
-      background: #6c757d;
+
+    p.subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 24px;
+      font-size: 14px;
     }
-    .page { display: none; }
-    .active { display: block; }
+
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    input:focus {
+      border-color: #111;
+      outline: none;
+    }
+
+    button.primary {
+      width: 100%;
+      padding: 12px;
+      background: #0a0a14;
+      color: #fff;
+      font-size: 15px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 16px;
+      transition: background 0.2s;
+    }
+
+    button.primary:hover {
+      background: #222;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      color: #aaa;
+      font-size: 13px;
+      margin: 16px 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .divider:not(:empty)::before {
+      margin-right: .75em;
+    }
+
+    .divider:not(:empty)::after {
+      margin-left: .75em;
+    }
+
+    button.google, button.secondary {
+      width: 100%;
+      padding: 12px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    button.google:hover, button.secondary:hover {
+      background: #f5f5f5;
+    }
+
+    .home {
+      text-align: center;
+    }
   </style>
 </head>
 <body>
+
   <!-- SIGNUP -->
-  <div id="signup" class="page active container">
-    <h2>Cadastro</h2>
-    <input type="text" placeholder="Nome completo" />
-    <input type="email" placeholder="E-mail" />
-    <input type="password" placeholder="Senha" />
-    <button onclick="showPage('login')">Cadastrar</button>
-    <button onclick="showPage('google-login')">Cadastrar com Google</button>
+  <div id="signup" class="page active">
+    <h2>Criar Conta</h2>
+    <p class="subtitle">Preencha seus dados para começar</p>
+    <label>Nome completo</label>
+    <input type="text" placeholder="Digite seu nome" />
+    <label>Gmail</label>
+    <input type="email" placeholder="seu.email@gmail.com" />
+    <label>Senha</label>
+    <input type="password" placeholder="Digite sua senha" />
+    <label>Número de celular</label>
+    <input type="tel" placeholder="(11) 99999-9999" />
+    <button class="primary" onclick="showPage('login')">Próximo</button>
+    <div class="divider">ou</div>
+    <button class="google" onclick="showPage('google-login')">Cadastrar-se com o Google</button>
   </div>
 
   <!-- LOGIN -->
-  <div id="login" class="page container">
+  <div id="login" class="page">
     <h2>Login</h2>
-    <input type="email" placeholder="E-mail" />
-    <input type="password" placeholder="Senha" />
-    <button onclick="showPage('home')">Entrar</button>
-    <button class="secondary" onclick="showPage('forgot-password')">Esqueci a senha</button>
+    <p class="subtitle">Entre com seu e-mail e senha</p>
+    <label>E-mail</label>
+    <input type="email" placeholder="seu.email@gmail.com" />
+    <label>Senha</label>
+    <input type="password" placeholder="Digite sua senha" />
+    <button class="primary" onclick="showPage('home')">Entrar</button>
+    <button class="secondary" onclick="showPage('forgot-password')">Esqueci minha senha</button>
   </div>
 
   <!-- GOOGLE LOGIN -->
-  <div id="google-login" class="page container">
+  <div id="google-login" class="page">
     <h2>Login com Google</h2>
-    <p>Digite seu Gmail e senha:</p>
-    <input type="email" placeholder="Gmail" />
-    <input type="password" placeholder="Senha" />
-    <button onclick="showPage('home')">Entrar com Google</button>
+    <p class="subtitle">Digite seu Gmail e senha</p>
+    <input type="email" placeholder="seu.email@gmail.com" />
+    <input type="password" placeholder="Digite sua senha" />
+    <button class="primary" onclick="showPage('home')">Entrar com Google</button>
     <button class="secondary" onclick="showPage('signup')">Voltar</button>
   </div>
 
   <!-- FORGOT PASSWORD -->
-  <div id="forgot-password" class="page container">
+  <div id="forgot-password" class="page">
     <h2>Recuperar Senha</h2>
-    <input type="email" placeholder="Digite seu e-mail" />
-    <button onclick="showPage('reset-password')">Avançar</button>
+    <p class="subtitle">Digite seu e-mail para redefinir a senha</p>
+    <input type="email" placeholder="seu.email@gmail.com" />
+    <button class="primary" onclick="showPage('reset-password')">Avançar</button>
     <button class="secondary" onclick="showPage('login')">Voltar</button>
   </div>
 
   <!-- RESET PASSWORD -->
-  <div id="reset-password" class="page container">
+  <div id="reset-password" class="page">
     <h2>Redefinir Senha</h2>
     <input type="password" placeholder="Nova senha" />
     <input type="password" placeholder="Repetir nova senha" />
-    <button onclick="showPage('home')">Continuar</button>
+    <button class="primary" onclick="showPage('home')">Continuar</button>
   </div>
 
   <!-- HOME -->
-  <div id="home" class="page container">
+  <div id="home" class="page home">
     <h2>🏠 Página Inicial</h2>
     <p>Bem-vindo ao aplicativo!</p>
     <button class="secondary" onclick="showPage('login')">Sair</button>
