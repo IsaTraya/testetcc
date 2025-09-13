@@ -2,54 +2,45 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iPet - Splash</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #c9e0f5; /* fundo azul claro */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .circle {
-      width: 300px;
-      height: 300px;
-      background-color: white;
-      border-radius: 50%; /* círculo */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      animation: fadeIn 1.5s ease-in-out;
-    }
-
-    .logo {
-      max-width: 200px;
-    }
-
-    /* animação de entrada */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.8); }
-      to { opacity: 1; transform: scale(1); }
-    }
-  </style>
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="circle">
-    <img src="logo.png" alt="Logo iPet" class="logo">
+<img src="/https://isatraya.github.io/testetcc/logo.png" alt=" logo.png" />
+  <div class="container">
+    <h2>Criar Conta</h2>
+    <p>Preencha seus dados para começar</p>
+
+    <form action="home.html" method="GET">
+      <div class="form-group">
+        <label>Nome completo</label>
+        <input type="text" name="nome" placeholder="Digite seu nome" required>
+      </div>
+
+      <div class="form-group">
+        <label>Gmail</label>
+        <input type="email" name="email" placeholder="seu.email@gmail.com" required>
+      </div>
+
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+        <div id="password-strength" class="password-strength"></div>
+      </div>
+      
+      <div class="form-group">
+        <label>Número de celular</label>
+        <input type="text" id="celular" name="celular" placeholder="(11) 99999-9999" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Próximo</button>
+    </form>
+
+    <div class="divider"><span>ou</span></div>
+    <a href="login-google.html" class="btn btn-google">Cadastrar-se com o Google</a>
   </div>
 
-  <script>
-    // Aguarda 5 segundos e redireciona para cadastro.html
-    setTimeout(() => {
-      window.location.href = "cadastro.html";
-    }, 5000);
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
-
 
