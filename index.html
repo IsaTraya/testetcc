@@ -1,1 +1,92 @@
+import { useState } from "react";
+import SignupPage from "./components/SignupPage";
+import LoginPage from "./components/LoginPage";
+import GoogleLoginPage from "./components/GoogleLoginPage";
+import ForgotPasswordPage from "./components/ForgotPasswordPage";
+import ResetPasswordPage from "./components/ResetPasswordPage";
+import HomePage from "./components/HomePage";
 
+type PageType = "signup" | "login" | "google-login" | "forgot-password" | "reset-password" | "home";
+
+export default function App() {
+  const [currentPage, setCurrentPage] = useState<PageType>("signup");
+
+  const navigateToHome = () => {
+    setCurrentPage("home");
+  };
+
+  const navigateToLogin = () => {
+    setCurrentPage("login");
+  };
+
+  const navigateToSignup = () => {
+    setCurrentPage("signup");
+  };
+
+  const navigateToGoogleLogin = () => {
+    setCurrentPage("google-login");
+  };
+
+  const navigateToForgotPassword = () => {
+    setCurrentPage("forgot-password");
+  };
+
+  const navigateToResetPassword = () => {
+    setCurrentPage("reset-password");
+  };
+
+  const renderCurrentPage = () => {
+    switch (currentPage) {
+      case "signup":
+        return (
+          <SignupPage
+            onNext={navigateToLogin}
+            onGoogleSignup={navigateToGoogleLogin}
+          />
+        );
+      
+      case "login":
+        return (
+          <LoginPage
+            onNext={navigateToHome}
+            onForgotPassword={navigateToForgotPassword}
+          />
+        );
+
+      case "google-login":
+        return (
+          <GoogleLoginPage
+            onNext={navigateToHome}
+            onBack={navigateToSignup}
+          />
+        );
+
+      case "forgot-password":
+        return (
+          <ForgotPasswordPage
+            onNext={navigateToResetPassword}
+            onBack={navigateToLogin}
+          />
+        );
+      
+      case "reset-password":
+        return (
+          <ResetPasswordPage
+            onNext={navigateToHome}
+          />
+        );
+      
+      case "home":
+        return <HomePage />;
+      
+      default:
+        return <SignupPage onNext={navigateToLogin} onGoogleSignup={navigateToGoogleLogin} />;
+    }
+  };
+
+  return (
+    <div className="size-full">
+      {renderCurrentPage()}
+    </div>
+  );
+}
