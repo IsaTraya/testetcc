@@ -1,4 +1,4 @@
-// Aguarda 5 segundos e redireciona automaticamente
+// Aguarda 5 segundos e redireciona para cadastro.html
 setTimeout(() => {
   window.location.href = "cadastro.html";
 }, 5000);
