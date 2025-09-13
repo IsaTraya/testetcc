@@ -2,156 +2,43 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mini App</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
-    body{background:#f8f9fc;display:flex;justify-content:center;align-items:center;height:100vh}
-    .container{background:#fff;padding:2rem;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.1);width:100%;max-width:380px;text-align:center;display:none}
-    h2{margin-bottom:8px;font-size:22px;color:#222}
-    p{font-size:14px;color:#666;margin-bottom:20px}
-    .form-group{margin-bottom:15px;text-align:left}
-    .form-group label{font-size:14px;margin-bottom:5px;display:block;color:#444}
-    .form-group input{width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font-size:14px;outline:none;transition:border .3s}
-    .form-group input:focus{border-color:#4a4aef}
-    .password-strength{font-size:12px;margin-top:5px}
-    .btn{width:100%;padding:12px;border:none;border-radius:8px;cursor:pointer;font-size:16px;margin-top:10px}
-    .btn-primary{background:#0b0b19;color:#fff}
-    .divider{display:flex;align-items:center;margin:20px 0}
-    .divider::before,.divider::after{content:"";flex:1;height:1px;background:#ddd}
-    .divider span{margin:0 10px;color:#999;font-size:14px}
-    .btn-google{background:#fff;border:1px solid #ddd;color:#333;font-weight:500}
-    .btn-google:hover{background:#f8f8f8}
-    a{display:block;margin-top:10px;font-size:13px;color:#4a4aef;text-decoration:none;text-align:right}
-    /* Tela principal */
-    #home h1{color:#222}
-  </style>
+  <title>Cadastro</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- Cadastro -->
-  <div id="cadastro" class="container">
+  <div class="container">
     <h2>Criar Conta</h2>
     <p>Preencha seus dados para começar</p>
 
-    <form id="cadastroForm">
+    <form action="home.html" method="GET">
       <div class="form-group">
         <label>Nome completo</label>
-        <input type="text" id="nome" placeholder="Digite seu nome" required>
+        <input type="text" name="nome" placeholder="Digite seu nome" required>
       </div>
 
       <div class="form-group">
         <label>Gmail</label>
-        <input type="email" id="email" placeholder="seu.email@gmail.com" required>
+        <input type="email" name="email" placeholder="seu.email@gmail.com" required>
       </div>
 
       <div class="form-group">
         <label>Senha</label>
-        <input type="password" id="senha" placeholder="Digite sua senha" required>
+        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
         <div id="password-strength" class="password-strength"></div>
       </div>
 
       <div class="form-group">
         <label>Número de celular</label>
-        <input type="text" id="celular" placeholder="(11) 99999-9999" required>
+        <input type="text" id="celular" name="celular" placeholder="(11) 99999-9999" required>
       </div>
 
       <button type="submit" class="btn btn-primary">Próximo</button>
     </form>
 
     <div class="divider"><span>ou</span></div>
-
-    <button class="btn btn-google" onclick="showPage('login-google')">Cadastrar-se com o Google</button>
+    <a href="login-google.html" class="btn btn-google">Cadastrar-se com o Google</a>
   </div>
 
-  <!-- Login com Google -->
-  <div id="login-google" class="container">
-    <h2>Login com Google</h2>
-    <form id="loginForm">
-      <div class="form-group">
-        <label>Gmail</label>
-        <input type="email" placeholder="seu.email@gmail.com" required>
-      </div>
-      <div class="form-group">
-        <label>Senha</label>
-        <input type="password" placeholder="Digite sua senha" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Entrar</button>
-      <a href="#" onclick="showPage('redefinir-senha')">Esqueci minha senha</a>
-    </form>
-  </div>
-
-  <!-- Redefinir Senha -->
-  <div id="redefinir-senha" class="container">
-    <h2>Redefinir Senha</h2>
-    <form id="resetForm">
-      <div class="form-group">
-        <label>Nova Senha</label>
-        <input type="password" placeholder="Digite a nova senha" required>
-      </div>
-      <div class="form-group">
-        <label>Repetir Senha</label>
-        <input type="password" placeholder="Repita a nova senha" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Continuar</button>
-    </form>
-  </div>
-
-  <!-- Página Principal -->
-  <div id="home" class="container">
-    <h1>Bem-vindo ao Aplicativo 🎉</h1>
-  </div>
-
-  <script>
-    // Mostrar uma tela
-    function showPage(pageId) {
-      document.querySelectorAll('.container').forEach(c => c.style.display = 'none');
-      document.getElementById(pageId).style.display = 'block';
-    }
-
-    // Inicial: cadastro
-    showPage('cadastro');
-
-    // Máscara celular
-    document.getElementById("celular").addEventListener("input", function(e) {
-      let v = e.target.value.replace(/\D/g, "");
-      if (v.length > 11) v = v.slice(0, 11);
-      if (v.length > 6) e.target.value = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
-      else if (v.length > 2) e.target.value = `(${v.slice(0,2)}) ${v.slice(2)}`;
-      else if (v.length > 0) e.target.value = `(${v}`;
-    });
-
-    // Força senha
-    document.getElementById("senha").addEventListener("input", function() {
-      const senha = this.value;
-      const strength = document.getElementById("password-strength");
-      let msg = "";
-      let color = "red";
-
-      if (senha.length < 6) {msg="Fraca"; color="red";}
-      else if (/[A-Z]/.test(senha)&&/\d/.test(senha)&&senha.length>=8){msg="Forte";color="green";}
-      else {msg="Regular"; color="orange";}
-
-      strength.textContent="Força: "+msg;
-      strength.style.color=color;
-    });
-
-    // Fluxos
-    document.getElementById("cadastroForm").addEventListener("submit", e=>{
-      e.preventDefault();
-      showPage('home');
-    });
-
-    document.getElementById("loginForm").addEventListener("submit", e=>{
-      e.preventDefault();
-      showPage('home');
-    });
-
-    document.getElementById("resetForm").addEventListener("submit", e=>{
-      e.preventDefault();
-      showPage('home');
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
-
