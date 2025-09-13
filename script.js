@@ -1,7 +1,3 @@
-// Aguarda 5 segundos e redireciona para cadastro.html
-setTimeout(() => {
-  window.location.href = "cadastro.html";
-}, 5000);
 // Máscara de celular
 document.addEventListener("DOMContentLoaded", () => {
   const celular = document.getElementById("celular");
