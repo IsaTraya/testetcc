@@ -1,92 +1,53 @@
-import { useState } from "react";
-import SignupPage from "./components/SignupPage";
-import LoginPage from "./components/LoginPage";
-import GoogleLoginPage from "./components/GoogleLoginPage";
-import ForgotPasswordPage from "./components/ForgotPasswordPage";
-import ResetPasswordPage from "./components/ResetPasswordPage";
-import HomePage from "./components/HomePage";
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App Simples</title>
+  <style>
+    .page { display: none; }
+    .active { display: block; }
+  </style>
+</head>
+<body>
+  <div id="signup" class="page active">
+    <h2>Cadastro</h2>
+    <button onclick="showPage('login')">Já tenho conta</button>
+    <button onclick="showPage('google-login')">Cadastrar-se com Google</button>
+  </div>
 
-type PageType = "signup" | "login" | "google-login" | "forgot-password" | "reset-password" | "home";
+  <div id="login" class="page">
+    <h2>Login</h2>
+    <button onclick="showPage('home')">Entrar</button>
+    <button onclick="showPage('forgot-password')">Esqueci senha</button>
+  </div>
 
-export default function App() {
-  const [currentPage, setCurrentPage] = useState<PageType>("signup");
+  <div id="google-login" class="page">
+    <h2>Login com Google</h2>
+    <button onclick="showPage('home')">Entrar</button>
+    <button onclick="showPage('signup')">Voltar</button>
+  </div>
 
-  const navigateToHome = () => {
-    setCurrentPage("home");
-  };
+  <div id="forgot-password" class="page">
+    <h2>Recuperar Senha</h2>
+    <button onclick="showPage('reset-password')">Avançar</button>
+    <button onclick="showPage('login')">Voltar</button>
+  </div>
 
-  const navigateToLogin = () => {
-    setCurrentPage("login");
-  };
+  <div id="reset-password" class="page">
+    <h2>Redefinir Senha</h2>
+    <button onclick="showPage('home')">Continuar</button>
+  </div>
 
-  const navigateToSignup = () => {
-    setCurrentPage("signup");
-  };
+  <div id="home" class="page">
+    <h2>🏠 Página Inicial</h2>
+  </div>
 
-  const navigateToGoogleLogin = () => {
-    setCurrentPage("google-login");
-  };
-
-  const navigateToForgotPassword = () => {
-    setCurrentPage("forgot-password");
-  };
-
-  const navigateToResetPassword = () => {
-    setCurrentPage("reset-password");
-  };
-
-  const renderCurrentPage = () => {
-    switch (currentPage) {
-      case "signup":
-        return (
-          <SignupPage
-            onNext={navigateToLogin}
-            onGoogleSignup={navigateToGoogleLogin}
-          />
-        );
-      
-      case "login":
-        return (
-          <LoginPage
-            onNext={navigateToHome}
-            onForgotPassword={navigateToForgotPassword}
-          />
-        );
-
-      case "google-login":
-        return (
-          <GoogleLoginPage
-            onNext={navigateToHome}
-            onBack={navigateToSignup}
-          />
-        );
-
-      case "forgot-password":
-        return (
-          <ForgotPasswordPage
-            onNext={navigateToResetPassword}
-            onBack={navigateToLogin}
-          />
-        );
-      
-      case "reset-password":
-        return (
-          <ResetPasswordPage
-            onNext={navigateToHome}
-          />
-        );
-      
-      case "home":
-        return <HomePage />;
-      
-      default:
-        return <SignupPage onNext={navigateToLogin} onGoogleSignup={navigateToGoogleLogin} />;
+  <script>
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
     }
-  };
-
-  return (
-    <div className="size-full">
-      {renderCurrentPage()}
-    </div>
-  );
-}
+  </script>
+</body>
+</html>
