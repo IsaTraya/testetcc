@@ -1,198 +1,201 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>App Completo</title>
+  <title>Criar Conta</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9fb;
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f8f9fc;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
     }
 
-    .page {
-      display: none;
+    .container {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       width: 100%;
       max-width: 380px;
-      background: #fff;
-      padding: 32px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      text-align: center;
     }
-
-    .active { display: block; }
 
     h2 {
-      text-align: center;
       margin-bottom: 8px;
       font-size: 22px;
-      font-weight: bold;
+      color: #222;
     }
 
-    p.subtitle {
-      text-align: center;
+    p {
+      font-size: 14px;
       color: #666;
-      margin-bottom: 24px;
-      font-size: 14px;
+      margin-bottom: 20px;
     }
 
-    label {
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .form-group label {
       font-size: 14px;
-      font-weight: 500;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
       display: block;
+      color: #444;
     }
 
-    input {
+    .form-group input {
       width: 100%;
       padding: 12px;
-      margin-bottom: 16px;
       border: 1px solid #ddd;
       border-radius: 8px;
       font-size: 14px;
-    }
-
-    input:focus {
-      border-color: #111;
       outline: none;
+      transition: border 0.3s;
     }
 
-    button.primary {
+    .form-group input:focus {
+      border-color: #4a4aef;
+    }
+
+    .password-strength {
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .btn {
       width: 100%;
       padding: 12px;
-      background: #0a0a14;
-      color: #fff;
-      font-size: 15px;
-      font-weight: bold;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      margin-bottom: 16px;
-      transition: background 0.2s;
+      font-size: 16px;
+      margin-top: 10px;
     }
 
-    button.primary:hover {
-      background: #222;
+    .btn-primary {
+      background: #0b0b19;
+      color: #fff;
     }
 
     .divider {
       display: flex;
       align-items: center;
-      text-align: center;
-      color: #aaa;
-      font-size: 13px;
-      margin: 16px 0;
+      margin: 20px 0;
     }
 
     .divider::before,
     .divider::after {
       content: "";
       flex: 1;
-      border-bottom: 1px solid #ddd;
+      height: 1px;
+      background: #ddd;
     }
 
-    .divider:not(:empty)::before {
-      margin-right: .75em;
+    .divider span {
+      margin: 0 10px;
+      color: #999;
+      font-size: 14px;
     }
 
-    .divider:not(:empty)::after {
-      margin-left: .75em;
-    }
-
-    button.google, button.secondary {
-      width: 100%;
-      padding: 12px;
+    .btn-google {
       background: #fff;
       border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 15px;
-      cursor: pointer;
-      margin-top: 8px;
+      color: #333;
+      font-weight: 500;
     }
 
-    button.google:hover, button.secondary:hover {
-      background: #f5f5f5;
-    }
-
-    .home {
-      text-align: center;
+    .btn-google:hover {
+      background: #f8f8f8;
     }
   </style>
 </head>
 <body>
-
-  <!-- SIGNUP -->
-  <div id="signup" class="page active">
+  <div class="container">
     <h2>Criar Conta</h2>
-    <p class="subtitle">Preencha seus dados para começar</p>
-    <label>Nome completo</label>
-    <input type="text" placeholder="Digite seu nome" />
-    <label>Gmail</label>
-    <input type="email" placeholder="seu.email@gmail.com" />
-    <label>Senha</label>
-    <input type="password" placeholder="Digite sua senha" />
-    <label>Número de celular</label>
-    <input type="tel" placeholder="(11) 99999-9999" />
-    <button class="primary" onclick="showPage('login')">Próximo</button>
-    <div class="divider">ou</div>
-    <button class="google" onclick="showPage('google-login')">Cadastrar-se com o Google</button>
-  </div>
+    <p>Preencha seus dados para começar</p>
 
-  <!-- LOGIN -->
-  <div id="login" class="page">
-    <h2>Login</h2>
-    <p class="subtitle">Entre com seu e-mail e senha</p>
-    <label>E-mail</label>
-    <input type="email" placeholder="seu.email@gmail.com" />
-    <label>Senha</label>
-    <input type="password" placeholder="Digite sua senha" />
-    <button class="primary" onclick="showPage('home')">Entrar</button>
-    <button class="secondary" onclick="showPage('forgot-password')">Esqueci minha senha</button>
-  </div>
+    <form id="cadastroForm">
+      <div class="form-group">
+        <label>Nome completo</label>
+        <input type="text" id="nome" placeholder="Digite seu nome" required>
+      </div>
 
-  <!-- GOOGLE LOGIN -->
-  <div id="google-login" class="page">
-    <h2>Login com Google</h2>
-    <p class="subtitle">Digite seu Gmail e senha</p>
-    <input type="email" placeholder="seu.email@gmail.com" />
-    <input type="password" placeholder="Digite sua senha" />
-    <button class="primary" onclick="showPage('home')">Entrar com Google</button>
-    <button class="secondary" onclick="showPage('signup')">Voltar</button>
-  </div>
+      <div class="form-group">
+        <label>Gmail</label>
+        <input type="email" id="email" placeholder="seu.email@gmail.com" required>
+      </div>
 
-  <!-- FORGOT PASSWORD -->
-  <div id="forgot-password" class="page">
-    <h2>Recuperar Senha</h2>
-    <p class="subtitle">Digite seu e-mail para redefinir a senha</p>
-    <input type="email" placeholder="seu.email@gmail.com" />
-    <button class="primary" onclick="showPage('reset-password')">Avançar</button>
-    <button class="secondary" onclick="showPage('login')">Voltar</button>
-  </div>
+      <div class="form-group">
+        <label>Senha</label>
+        <input type="password" id="senha" placeholder="Digite sua senha" required>
+        <div id="password-strength" class="password-strength"></div>
+      </div>
 
-  <!-- RESET PASSWORD -->
-  <div id="reset-password" class="page">
-    <h2>Redefinir Senha</h2>
-    <input type="password" placeholder="Nova senha" />
-    <input type="password" placeholder="Repetir nova senha" />
-    <button class="primary" onclick="showPage('home')">Continuar</button>
-  </div>
+      <div class="form-group">
+        <label>Número de celular</label>
+        <input type="text" id="celular" placeholder="(11) 99999-9999" required>
+      </div>
 
-  <!-- HOME -->
-  <div id="home" class="page home">
-    <h2>🏠 Página Inicial</h2>
-    <p>Bem-vindo ao aplicativo!</p>
-    <button class="secondary" onclick="showPage('login')">Sair</button>
+      <button type="submit" class="btn btn-primary">Próximo</button>
+    </form>
+
+    <div class="divider"><span>ou</span></div>
+
+    <button class="btn btn-google" onclick="loginGoogle()">Cadastrar-se com o Google</button>
   </div>
 
   <script>
-    function showPage(pageId) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById(pageId).classList.add('active');
+    // Máscara para celular
+    document.getElementById("celular").addEventListener("input", function(e) {
+      let v = e.target.value.replace(/\D/g, "");
+      if (v.length > 11) v = v.slice(0, 11);
+      if (v.length > 6) e.target.value = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+      else if (v.length > 2) e.target.value = `(${v.slice(0,2)}) ${v.slice(2)}`;
+      else if (v.length > 0) e.target.value = `(${v}`;
+    });
+
+    // Força da senha
+    document.getElementById("senha").addEventListener("input", function() {
+      const senha = this.value;
+      const strength = document.getElementById("password-strength");
+      let msg = "";
+      let color = "red";
+
+      if (senha.length < 6) {
+        msg = "Fraca";
+        color = "red";
+      } else if (/[A-Z]/.test(senha) && /\d/.test(senha) && senha.length >= 8) {
+        msg = "Forte";
+        color = "green";
+      } else {
+        msg = "Regular";
+        color = "orange";
+      }
+
+      strength.textContent = "Força: " + msg;
+      strength.style.color = color;
+    });
+
+    // Submissão do formulário
+    document.getElementById("cadastroForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("Cadastro realizado com sucesso!");
+    });
+
+    // Simulação login Google
+    function loginGoogle() {
+      alert("Redirecionando para login com Google...");
     }
   </script>
 </body>
